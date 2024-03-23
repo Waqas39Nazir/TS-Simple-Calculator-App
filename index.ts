@@ -1,0 +1,78 @@
+#! /usr/bin/env node
+import inquirer from "inquirer";
+import gradient from "gradient-string";
+import figlet from "figlet";
+
+// const userInput = await inquirer.prompt([
+//   {
+//     name: "numbers",
+//     type: "input",
+//     message: "Please enter atleat two numbers",
+//   },
+// ]);
+
+// console.log("Numbers:", userInput);
+inquirer
+  .prompt([
+    {
+      name: "inputValue",
+      message: gradient.pastel.multiline("Please enter two numbers: "),
+      type: "input",
+    },
+  ])
+  .then((answer) => {
+    const numbers = answer.inputValue.toString().split(" ");
+    const num1 = parseFloat(numbers[0]);
+    const num2 = parseFloat(numbers[1]);
+    inquirer
+      .prompt([
+        {
+          name: "operator",
+          message: gradient.pastel.multiline("Please select an operator:"),
+          type: "list",
+          choices: [
+            "+ (Addition)",
+            "- (Subtraction)",
+            "/ (Division)",
+            "* (Multiplication)",
+            "% (Modulus)",
+          ],
+        },
+      ])
+      .then((selection: any) => {
+        // the spread operator us ...numbers
+        // const result: any = resultHandler(selection.operator, ...numbers);
+
+        const result: any = resultHandler(selection.operator, num1, num2);
+
+        figlet(result, (err, data) => {
+          if (isNaN(result)) {
+            console.log(gradient.pastel.multiline(`Please enter two numbers`));
+            return;
+          }
+          console.log(gradient.pastel.multiline(data));
+        });
+      });
+  })
+  .catch((error) => {
+    console.log("Error:", error);
+  });
+
+// the rest operator is numbers
+// const resultHandler = (operator: string, ...numbers: any[]) => {
+const resultHandler = (operator: string, num1: number, num2: number) => {
+  let result = 0;
+
+  if (operator === "+ (Addition)") {
+    result = num1 + num2;
+  } else if (operator === "- (Subtraction)") {
+    result = num1 - num2;
+  } else if (operator === "* (Multiplication)") {
+    result = num1 * num2;
+  } else if (operator === "/ (Division)") {
+    result = num1 / num2;
+  } else if (operator === "% (Modulus)") {
+    result = num1 % num2;
+  }
+  return result;
+};
