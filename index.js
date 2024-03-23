@@ -1,5 +1,4 @@
 #! /usr/bin/env node
-import chalkAnimation from "chalk-animation";
 import inquirer from "inquirer";
 import gradient from "gradient-string";
 import figlet from "figlet";
@@ -11,17 +10,6 @@ import figlet from "figlet";
 //   },
 // ]);
 // console.log("Numbers:", userInput);
-const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
-// async function welcome() {
-//   const welcomeMessage = chalkAnimation.rainbow(
-//     "Simple Calculator in TypeScript"
-//   );
-//   await sleep();
-//   welcomeMessage.stop();
-// }
-// welcome();
-const welcomeMessage = chalkAnimation.rainbow("Simple Calculator in TypeScript");
-welcomeMessage.stop();
 inquirer
     .prompt([
     {
