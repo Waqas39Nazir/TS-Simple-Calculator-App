@@ -15,15 +15,43 @@ import figlet from "figlet";
 inquirer
   .prompt([
     {
-      name: "inputValue",
-      message: gradient.pastel.multiline("Please enter two numbers: "),
+      name: "num1",
+      message: gradient.pastel.multiline("Please enter first numbers: "),
       type: "input",
+      validate: (value) => {
+        if (isNaN(value)) {
+          console.log(
+            "\n",
+            gradient.pastel.multiline("Hint::Only number are allowed")
+          );
+          return false;
+        }
+        return true;
+      },
+    },
+    {
+      name: "num2",
+      message: gradient.pastel.multiline("Please enter second numbers: "),
+      type: "input",
+      validate: (value) => {
+        if (isNaN(value)) {
+          console.log(
+            "\n",
+            gradient.pastel.multiline("Hint:Only number are allowed")
+          );
+          return false;
+        }
+        return true;
+      },
     },
   ])
   .then((answer) => {
-    const numbers = answer.inputValue.toString().split(" ");
-    const num1 = parseFloat(numbers[0]);
-    const num2 = parseFloat(numbers[1]);
+    // const numbers = answer.inputValue.toString().split(" ");
+    const num1 = parseFloat(answer.num1);
+    const num2 = parseFloat(answer.num2);
+
+    console.log("Numbers:", answer);
+
     inquirer
       .prompt([
         {
@@ -42,14 +70,12 @@ inquirer
       .then((selection: any) => {
         // the spread operator us ...numbers
         // const result: any = resultHandler(selection.operator, ...numbers);
-
         const result: any = resultHandler(selection.operator, num1, num2);
-
         figlet(result, (err, data) => {
-          if (isNaN(result)) {
-            console.log(gradient.pastel.multiline(`Please enter two numbers`));
-            return;
-          }
+          // if (isNaN(result)) {
+          //   console.log(gradient.pastel.multiline(`Please enter two numbers`));
+          //   return;
+          // }
           console.log(gradient.pastel.multiline(data));
         });
       });
@@ -70,8 +96,14 @@ const resultHandler = (operator: string, num1: number, num2: number) => {
   } else if (operator === "* (Multiplication)") {
     result = num1 * num2;
   } else if (operator === "/ (Division)") {
+    if (num2 === 0) {
+      return "The Divider can not be zero";
+    }
     result = num1 / num2;
   } else if (operator === "% (Modulus)") {
+    if (num2 === 0) {
+      return "The Divider can not be zero";
+    }
     result = num1 % num2;
   }
   return result;
