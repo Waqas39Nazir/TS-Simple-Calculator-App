@@ -36,39 +36,60 @@ inquirer
             return true;
         },
     },
+    {
+        name: "operator",
+        message: gradient.pastel.multiline("Please select an operator:"),
+        type: "list",
+        choices: [
+            "+ (Addition)",
+            "- (Subtraction)",
+            "/ (Division)",
+            "* (Multiplication)",
+            "% (Modulus)",
+        ],
+    },
 ])
     .then((answer) => {
     // const numbers = answer.inputValue.toString().split(" ");
     const num1 = parseFloat(answer.num1);
     const num2 = parseFloat(answer.num2);
+    const operator = answer.operator;
     console.log("Numbers:", answer);
-    inquirer
-        .prompt([
-        {
-            name: "operator",
-            message: gradient.pastel.multiline("Please select an operator:"),
-            type: "list",
-            choices: [
-                "+ (Addition)",
-                "- (Subtraction)",
-                "/ (Division)",
-                "* (Multiplication)",
-                "% (Modulus)",
-            ],
-        },
-    ])
-        .then((selection) => {
-        // the spread operator us ...numbers
-        // const result: any = resultHandler(selection.operator, ...numbers);
-        const result = resultHandler(selection.operator, num1, num2);
-        figlet(result, (err, data) => {
-            // if (isNaN(result)) {
-            //   console.log(gradient.pastel.multiline(`Please enter two numbers`));
-            //   return;
-            // }
-            console.log(gradient.pastel.multiline(data));
-        });
+    const result = resultHandler(operator, num1, num2);
+    figlet(result, (err, data) => {
+        // if (isNaN(result)) {
+        //   console.log(gradient.pastel.multiline(`Please enter two numbers`));
+        //   return;
+        // }
+        console.log(gradient.pastel.multiline(data));
     });
+    // inquirer
+    //   .prompt([
+    //     {
+    //       name: "operator",
+    //       message: gradient.pastel.multiline("Please select an operator:"),
+    //       type: "list",
+    //       choices: [
+    //         "+ (Addition)",
+    //         "- (Subtraction)",
+    //         "/ (Division)",
+    //         "* (Multiplication)",
+    //         "% (Modulus)",
+    //       ],
+    //     },
+    //   ])
+    //   .then((selection: any) => {
+    //     // the spread operator us ...numbers
+    //     // const result: any = resultHandler(selection.operator, ...numbers);
+    //     const result: any = resultHandler(selection.operator, num1, num2);
+    //     figlet(result, (err, data) => {
+    //       // if (isNaN(result)) {
+    //       //   console.log(gradient.pastel.multiline(`Please enter two numbers`));
+    //       //   return;
+    //       // }
+    //       console.log(gradient.pastel.multiline(data));
+    //     });
+    //   });
 })
     .catch((error) => {
     console.log("Error:", error);
