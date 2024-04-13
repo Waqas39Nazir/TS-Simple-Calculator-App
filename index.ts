@@ -63,8 +63,6 @@ inquirer
     const num2 = parseFloat(answer.num2);
     const operator = answer.operator;
 
-    console.log("Numbers:", answer);
-
     const result: any = resultHandler(operator, num1, num2);
     figlet(result, (err, data) => {
       // if (isNaN(result)) {
