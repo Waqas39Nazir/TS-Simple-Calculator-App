@@ -54,7 +54,7 @@ inquirer
     const num1 = parseFloat(answer.num1);
     const num2 = parseFloat(answer.num2);
     const operator = answer.operator;
-    const result = resultHandler(operator, num1, num2);
+    const result = `Result: ${resultHandler(operator, num1, num2)}`;
     figlet(result, (err, data) => {
         // if (isNaN(result)) {
         //   console.log(gradient.pastel.multiline(`Please enter two numbers`));
