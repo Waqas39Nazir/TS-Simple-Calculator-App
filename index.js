@@ -63,33 +63,6 @@ inquirer
         // }
         console.log(gradient.pastel.multiline(data));
     });
-    // inquirer
-    //   .prompt([
-    //     {
-    //       name: "operator",
-    //       message: gradient.pastel.multiline("Please select an operator:"),
-    //       type: "list",
-    //       choices: [
-    //         "+ (Addition)",
-    //         "- (Subtraction)",
-    //         "/ (Division)",
-    //         "* (Multiplication)",
-    //         "% (Modulus)",
-    //       ],
-    //     },
-    //   ])
-    //   .then((selection: any) => {
-    //     // the spread operator us ...numbers
-    //     // const result: any = resultHandler(selection.operator, ...numbers);
-    //     const result: any = resultHandler(selection.operator, num1, num2);
-    //     figlet(result, (err, data) => {
-    //       // if (isNaN(result)) {
-    //       //   console.log(gradient.pastel.multiline(`Please enter two numbers`));
-    //       //   return;
-    //       // }
-    //       console.log(gradient.pastel.multiline(data));
-    //     });
-    //   });
 })
     .catch((error) => {
     console.log("Error:", error);
