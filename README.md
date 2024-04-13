@@ -11,7 +11,7 @@
 
  <!-- To Test it Locally 
  * npm i -g
- * anywhere in terminal npx subtract
+ * anywhere in terminal npx simple-calculator-test
 -->
 
  <!--  To Test it after publishing at NPM
